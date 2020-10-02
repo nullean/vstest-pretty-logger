@@ -8,7 +8,7 @@ $ dotnet add package Nullean.VsTest.Pretty.TestLogger
 ```
 
 This logger is intended to replace the default console logger.
-To do so create a `.runsettings` file and make your `Test.csproj` aware of these `.runsettings`.
+To do so create a `.runsettings` file 
 
 ```xml
 <RunSettings>
@@ -19,6 +19,14 @@ To do so create a `.runsettings` file and make your `Test.csproj` aware of these
     </Loggers>
   </LoggerRunSettings>
 </RunSettings>
+```
+
+Then make your `Test.csproj` (or `fsproj`!) aware of these `.runsettings`.
+
+```xml
+<PropertyGroup>
+  <RunSettingsFilePath>$(MSBuildProjectDirectory)\.runsettings</RunSettingsFilePath>
+</PropertyGroup>
 ```
 
 ### Key goals
