@@ -7,6 +7,7 @@ let ToolName = "vstest-pretty-logger"
 let Repository = sprintf "nullean/%s" ToolName
 
 let AssemblyName = "Nullean.VsTest.Pretty.TestLogger"
+let Tfm = "netstandard2.0"
 
 let Root =
     let mutable dir = DirectoryInfo(".")
