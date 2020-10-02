@@ -31,14 +31,14 @@ To do so create a `.runsettings` file and make your `Test.csproj` aware of these
 
 ### Show me the goods
 
-This is what `dotnet test` looks like out of the box **without** this logger
+This is what running tests will look like once configured:
 
+[![asciicast](https://asciinema.org/a/363126.svg)](https://asciinema.org/a/363126?autoplay=1)
 
-[![asciicast](https://asciinema.org/a/363123.svg)](https://asciinema.org/a/363123)
+For comparison this is what `dotnet test` looks like out of the box **without** this logger
 
-And the update version
+[![asciicast](https://asciinema.org/a/363123.svg)](https://asciinema.org/a/363123?autoplay=1)
 
-[![asciicast](https://asciinema.org/a/363126.svg)](https://asciinema.org/a/363126)
 
 
 
