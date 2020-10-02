@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Nullean.VsTest.PrettyLogger
+namespace Nullean.VsTest.Pretty.TestLogger
 {
 	internal static class StringExtensions
 	{

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Nullean.VsTest.PrettyLogger
+namespace Nullean.VsTest.Pretty.TestLogger
 {
 	internal static class WordWrapper
 	{

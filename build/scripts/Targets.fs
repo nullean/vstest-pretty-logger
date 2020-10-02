@@ -41,7 +41,7 @@ let private validatePackages (arguments:ParseResults<Arguments>) =
     let nugetPackage =
         let p = Paths.Output.GetFiles("*.nupkg") |> Seq.sortByDescending(fun f -> f.CreationTimeUtc) |> Seq.head
         Paths.RootRelative p.FullName
-    exec "dotnet" ["nupkg-validator"; nugetPackage; "-v"; currentVersion.Value; "-a"; Paths.ToolName; "-k"; "96c599bbe3e70f5d"] |> ignore
+    exec "dotnet" ["nupkg-validator"; nugetPackage; "-v"; currentVersion.Value; "-a"; Paths.AssemblyName; "-k"; "96c599bbe3e70f5d"] |> ignore
 
 let private generateApiChanges (arguments:ParseResults<Arguments>) =
     let output = Paths.RootRelative <| Paths.Output.FullName

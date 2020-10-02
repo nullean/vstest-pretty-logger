@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 
-namespace Nullean.VsTest.PrettyLogger
+namespace Nullean.VsTest.Pretty.TestLogger
 {
 	[FriendlyName(FriendlyName)]
 	[ExtensionUri(ExtensionUri)]
