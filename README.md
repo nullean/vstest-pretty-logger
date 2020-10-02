@@ -1,0 +1,3 @@
+# Nullean.VsTest.Pretty.TestLogger
+
+
