@@ -41,11 +41,10 @@ let private pristineCheck (arguments:ParseResults<Arguments>) =
     | false, _ -> printf "Checkout is dirty but -c was specified to ignore this"
     | _ -> failwithf "The checkout folder has pending changes, aborting"
 
-let private test (arguments:ParseResults<Arguments>) =
-    let junitOutput = Path.Combine(Paths.Output.FullName, "junit-{assembly}-{framework}-test-results.xml")
-    let loggerPathArgs = sprintf "LogFilePath=%s" junitOutput
-    let loggerArg = sprintf "--logger:\"junit;%s\"" loggerPathArgs
-    exec "dotnet" ["test"; "-c"; "RELEASE"; loggerArg] |> ignore
+let private test (_:ParseResults<Arguments>) =
+    // we don't want to test anything really :)
+    // We have example tests that fail on purpose
+    ignore()
 
 let private generatePackages (arguments:ParseResults<Arguments>) =
     let output = Paths.RootRelative Paths.Output.FullName
