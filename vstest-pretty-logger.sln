@@ -8,7 +8,6 @@ ProjectSection(SolutionItems) = preProject
 	build.bat = build.bat
 	nuget-icon.png = nuget-icon.png
 	README.md = README.md
-	LICENSE = LICENSE
 	global.json = global.json
 	Directory.Build.props = Directory.Build.props
 	.github\workflows\ci.yml = .github\workflows\ci.yml

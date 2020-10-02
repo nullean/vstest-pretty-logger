@@ -8,7 +8,7 @@ let Repository = sprintf "nullean/%s" ToolName
 
 let AssemblyName = "Nullean.VsTest.Pretty.TestLogger"
 let MainTFM = "netstandard2.0"
-let SignKey = "069ca2728db333c1"
+let SignKey = "96c599bbe3e70f5d"
 
 let ValidateAssemblyName = true
 let IncludeGitHashInInformational = true
