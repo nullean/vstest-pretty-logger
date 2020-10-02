@@ -7,7 +7,12 @@ let ToolName = "vstest-pretty-logger"
 let Repository = sprintf "nullean/%s" ToolName
 
 let AssemblyName = "Nullean.VsTest.Pretty.TestLogger"
-let Tfm = "netstandard2.0"
+let MainTFM = "netstandard2.0"
+let SignKey = "069ca2728db333c1"
+
+let ValidateAssemblyName = true
+let IncludeGitHashInInformational = true
+let GenerateApiChanges = true
 
 let Root =
     let mutable dir = DirectoryInfo(".")
