@@ -7,6 +7,9 @@
     <IsPackable>true</IsPackable>
     <IsTestProject>false</IsTestProject>
     <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
 
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
@@ -23,6 +26,7 @@
     </Description>
     <Title>VsTest pretty output logger</Title>
 
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +39,11 @@
       <Pack>True</Pack>
       <PackagePath>nuget-icon.png</PackagePath>
     </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\Nullean.PrettyPrinter.Core\WordWrapper.cs" />
+    <Compile Include="..\Nullean.PrettyPrinter.Core\TestConsoleWriter.cs" />
   </ItemGroup>
 
 </Project>

@@ -19,6 +19,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "scripts", "build\scripts\sc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullean.VsTest.Pretty.TestLogger.Example", "src\Nullean.VsTest.Pretty.TestLogger.Example\Nullean.VsTest.Pretty.TestLogger.Example.csproj", "{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullean.JunitXmlPrettyPrinter", "src\Nullean.JunitXmlPrettyPrinter\Nullean.JunitXmlPrettyPrinter.csproj", "{18120F38-375B-469B-BBD1-A29CC01AE78C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullean.PrettyPrinter.Core", "src\Nullean.PrettyPrinter.Core\Nullean.PrettyPrinter.Core.csproj", "{06DD1111-73F3-41A2-841B-31C60F7162EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +41,20 @@ Global
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18120F38-375B-469B-BBD1-A29CC01AE78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18120F38-375B-469B-BBD1-A29CC01AE78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18120F38-375B-469B-BBD1-A29CC01AE78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18120F38-375B-469B-BBD1-A29CC01AE78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06DD1111-73F3-41A2-841B-31C60F7162EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06DD1111-73F3-41A2-841B-31C60F7162EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06DD1111-73F3-41A2-841B-31C60F7162EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06DD1111-73F3-41A2-841B-31C60F7162EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{879F7668-3136-4A46-8B62-17085A764CBA} = {32D9729D-0ACB-4F0F-A3D8-2194FAE4A8C8}
 		{827FD131-B575-4C75-94BB-31141C359273} = {61F7EFA3-2D67-47B5-9327-3AE03AC1AC0D}
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A} = {32D9729D-0ACB-4F0F-A3D8-2194FAE4A8C8}
+		{18120F38-375B-469B-BBD1-A29CC01AE78C} = {32D9729D-0ACB-4F0F-A3D8-2194FAE4A8C8}
+		{06DD1111-73F3-41A2-841B-31C60F7162EC} = {32D9729D-0ACB-4F0F-A3D8-2194FAE4A8C8}
 	EndGlobalSection
 EndGlobal
