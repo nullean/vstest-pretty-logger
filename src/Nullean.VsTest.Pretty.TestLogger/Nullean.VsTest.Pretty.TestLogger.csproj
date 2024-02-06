@@ -31,14 +31,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="15.8.0" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Content Include="..\..\nuget-icon.png" CopyToOutputDirectory="PreserveNewest">
-      <Link>nuget-icon.png</Link>
-      <Pack>True</Pack>
-      <PackagePath>nuget-icon.png</PackagePath>
-    </Content>
+    <PackageReference Include="XunitContext" Version="3.3.1" />
   </ItemGroup>
   
   <ItemGroup>

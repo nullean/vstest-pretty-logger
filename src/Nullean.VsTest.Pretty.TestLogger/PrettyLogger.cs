@@ -22,7 +22,6 @@ namespace Nullean.VsTest.Pretty.TestLogger
 	public class PrettyLogger : ITestLogger
 	{
 		private static readonly ConsoleColor DefaultBg = Console.BackgroundColor;
-		private int _writtenPassed;
 		public const string ExtensionUri = "logger://Microsoft/TestPlatform/NulleanPrettyLogger/v1";
 		public const string FriendlyName = "pretty";
 		private readonly List<string> _disableSkipNamespaces = new();
@@ -32,6 +31,7 @@ namespace Nullean.VsTest.Pretty.TestLogger
 		private readonly TestConsoleWriter _writer = new();
 
 		private string[] _discoveredSources = { };
+		private string? _testFilter;
 
 		public void Initialize(TestLoggerEvents events, string testRunDirectory)
 		{
@@ -40,12 +40,47 @@ namespace Nullean.VsTest.Pretty.TestLogger
 				if (e.Result.Outcome != TestOutcome.Failed) return;
 				_failedTests.Enqueue(e.Result);
 			};
+			var informationalStartsWith = new[]
+			{
+				"xUnit.net", "Discovering:", "Discovered:", "Starting:", "Finished:"
+			};
 
+			events.TestRunMessage += (sender, args) =>
+			{
+				var parts = args.Message.Split(new[] { ']' }, 2, StringSplitOptions.RemoveEmptyEntries);
+
+				switch (args.Level)
+				{
+					case TestMessageLevel.Informational:
+						if (informationalStartsWith.Any(i => parts[1].Trim().StartsWith(i)))
+						{
+							Console.ForegroundColor = ConsoleColor.White;
+							Console.WriteLine(parts[1]);
+						}
+						break;
+
+					case TestMessageLevel.Warning:
+						if (parts[1].Contains("[SKIP]")) break;
+						Console.ForegroundColor = ConsoleColor.Yellow;
+						Console.WriteLine(args.Message);
+						break;
+					case TestMessageLevel.Error:
+						if (parts[1].Contains("[FAIL]")) break;
+						Console.ForegroundColor = ConsoleColor.Red;
+						Console.WriteLine(parts[1]);
+						break;
+				}
+				Console.ResetColor();
+			};
 			events.TestResult += TestResultHandler;
 			events.TestRunComplete += TestRunCompleteHandler;
 			events.TestRunStart += (sender, args) =>
 			{
 				_discoveredSources = args.TestRunCriteria.Sources?.ToArray() ?? Array.Empty<string>();
+
+				_writer.WriteStartTests(_discoveredSources);
+
+				_testFilter = args.TestRunCriteria.TestCaseFilter;
 
 				var settingsXml = args.TestRunCriteria.TestRunSettings;
 				if (string.IsNullOrWhiteSpace(settingsXml)) return;
@@ -68,50 +103,22 @@ namespace Nullean.VsTest.Pretty.TestLogger
 			};
 		}
 
-		// ReSharper disable once UnusedMember.Global
-		// handy to keep around
-		private int _seenSuccesses;
-
 		public void TestResultHandler(object sender, TestResultEventArgs e)
 		{
 			var testCase = e.Result.TestCase;
 			var skipSkips = _disableSkipNamespaces.Any(n => testCase.FullyQualifiedName.StartsWith(n));
-			var takingTooLong = e.Result.Duration > TimeSpan.FromSeconds(2);
 			switch (e.Result.Outcome)
 			{
 				//case TestOutcome.Passed when !takingTooLong && !(isExamples || isReproduce): break;
 				case TestOutcome.Skipped when skipSkips: break;
-				case TestOutcome.Passed when !takingTooLong:
-					Interlocked.Increment(ref _seenSuccesses);
-					if (_seenSuccesses % 10 != 0) return;
-
-					Console.BackgroundColor = DefaultBg;
-					Console.ForegroundColor = ConsoleColor.Green;
-					Console.Write(".");
-					Console.ResetColor();
-					_writtenPassed++;
-					if (_writtenPassed > Console.WindowWidth / 2)
-					{
-						Console.WriteLine();
-						_writtenPassed = 0;
-					}
-
-					break;
 				default:
 					WriteTestResult(e.Result, longForm: false);
 					break;
 			}
 		}
 
-		private void WriteTestResult(TestResult result, bool longForm = true)
-		{
-			if (_writtenPassed > 0)
-			{
-				Console.WriteLine();
-				_writtenPassed = 0;
-			}
-
-			var data = new TestResultData
+		private TestResultData ToTestResultData(TestResult result) =>
+			new()
 			{
 				FullyQualifiedName = result.TestCase.FullyQualifiedName,
 				Duration = result.Duration,
@@ -122,6 +129,11 @@ namespace Nullean.VsTest.Pretty.TestLogger
 				CodeFilePath = result.TestCase.CodeFilePath,
 				Outcome = ParseOutcome(result.Outcome),
 			};
+
+		private void WriteTestResult(TestResult result, bool longForm = true)
+		{
+			var data = ToTestResultData(result);
+
 			_writer.WriteTestResult(data, longForm);
 		}
 
@@ -140,22 +152,18 @@ namespace Nullean.VsTest.Pretty.TestLogger
 			var overallStats = e.TestRunStatistics.Stats.ToDictionary(kv => ParseOutcome(kv.Key), v => v.Value);
 			var stats = new TestResultsStatistics(overallStats, _discoveredSources)
 			{
+				TestFilter = _testFilter,
 				TotalTime = e.ElapsedTimeInRunningTests.TotalMilliseconds,
 				TotalExecuted = e.TestRunStatistics.ExecutedTests,
 			};
 
-			var f = _failedTests.Count;
-			if (f > 0)
-			{
-				if (f < 20)
-					TestConsoleWriter.Announce($"⚡️REPLAY {f:N0} FAILED TEST{(f > 1 ? "S" : "")} ⚡️");
-				else
-					TestConsoleWriter.Announce($"⚡️REPLAY 20 of {f:N0} FAILED TESTS ⚡️");
-				for (var expanded = 0; _failedTests.TryDequeue(out var testResult); expanded++)
-					WriteTestResult(testResult, expanded <= 20);
-			}
 
-			_writer.WriteTestStatistics(stats);
+
+			var failures = new List<TestResultData>();
+			for (var i = 0; _failedTests.TryDequeue(out var testResult); i++)
+				failures.Add(ToTestResultData(testResult));
+
+			_writer.WriteTestStatistics(stats, failures);
 		}
 	}
 }

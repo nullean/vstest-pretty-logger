@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Nullean.VsTest.Pretty.TestLogger.Example
+namespace Nullean.VsTest.Pretty.TestLogger.Tests
 {
 	public class UnitTest1
 	{
