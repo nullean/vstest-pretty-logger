@@ -17,7 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{32D9729D-0AC
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "scripts", "build\scripts\scripts.fsproj", "{827FD131-B575-4C75-94BB-31141C359273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullean.VsTest.Pretty.TestLogger.Example", "src\Nullean.VsTest.Pretty.TestLogger.Example\Nullean.VsTest.Pretty.TestLogger.Example.csproj", "{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullean.VsTest.Pretty.TestLogger.Tests", "tests\Nullean.VsTest.Pretty.TestLogger.Tests\Nullean.VsTest.Pretty.TestLogger.Tests.csproj", "{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5882E676-3750-4A07-9410-B4FB6B87BEA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullean.PrettyLogger.Tests", "tests\Nullean.PrettyLogger.Tests\Nullean.PrettyLogger.Tests.csproj", "{3DA866B8-A7DB-445B-A725-A9BEEF468DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +41,15 @@ Global
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA866B8-A7DB-445B-A725-A9BEEF468DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA866B8-A7DB-445B-A725-A9BEEF468DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA866B8-A7DB-445B-A725-A9BEEF468DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA866B8-A7DB-445B-A725-A9BEEF468DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{879F7668-3136-4A46-8B62-17085A764CBA} = {32D9729D-0ACB-4F0F-A3D8-2194FAE4A8C8}
 		{827FD131-B575-4C75-94BB-31141C359273} = {61F7EFA3-2D67-47B5-9327-3AE03AC1AC0D}
-		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A} = {32D9729D-0ACB-4F0F-A3D8-2194FAE4A8C8}
+		{EA8D79AA-51BD-47B9-92D5-BCA52C14A99A} = {5882E676-3750-4A07-9410-B4FB6B87BEA4}
+		{3DA866B8-A7DB-445B-A725-A9BEEF468DAC} = {5882E676-3750-4A07-9410-B4FB6B87BEA4}
 	EndGlobalSection
 EndGlobal

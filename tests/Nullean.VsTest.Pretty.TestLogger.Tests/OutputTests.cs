@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Nullean.VsTest.Pretty.TestLogger.Example
+namespace Nullean.VsTest.Pretty.TestLogger.Tests
 {
 	public class UnitTest1
 	{
@@ -22,8 +22,8 @@ namespace Nullean.VsTest.Pretty.TestLogger.Example
 		private void An() => Artifical();
 		private void Artifical() => Somewhat();
 		private void Somewhat() => Interesting();
-		private void Interesting() => StackTrance();
-		private void StackTrance() => throw new Exception("boom!");
+		private void Interesting() => StackTrace();
+		private void StackTrace() => throw new Exception("boom!");
 
 	}
 }
