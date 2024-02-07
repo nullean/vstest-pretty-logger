@@ -5,9 +5,7 @@
     <MinVerMinimumMajorMinor>0.1</MinVerMinimumMajorMinor>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="2.3.1">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Update="MinVer" Version="4.3.0" PrivateAssets="All"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="../../nuget-icon.png" CopyToOutputDirectory="PreserveNewest">
