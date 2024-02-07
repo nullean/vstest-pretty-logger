@@ -3,11 +3,11 @@ using Xunit.Abstractions;
 
 namespace Nullean.PrettyLogger.Tests;
 
-public class UnitTest1 : XunitContextBase
+public class UnitTest1
 {
 	private readonly ITestOutputHelper _output;
 
-	public UnitTest1(ITestOutputHelper output) : base(output)
+	public UnitTest1(ITestOutputHelper output)
 	{
 		_output = output;
 		_output.WriteLine("output from constructor");
@@ -19,7 +19,7 @@ public class UnitTest1 : XunitContextBase
 	[Fact]
 	public async Task Test4()
 	{
-		WriteLine("Passing test's output");
+		_output.WriteLine("Passing test's output");
 		await Task.Delay(TimeSpan.FromSeconds(5));
 		Assert.True(true);
 	}
@@ -27,7 +27,7 @@ public class UnitTest1 : XunitContextBase
 	[Fact]
 	public void Test1()
 	{
-		WriteLine("Making sure messages are preserved");
+		_output.WriteLine("Making sure messages are preserved");
 		throw new Exception("BOOM");
 	}
 

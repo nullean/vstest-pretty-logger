@@ -10,7 +10,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
 
@@ -26,17 +25,10 @@
     </Description>
     <Title>VsTest pretty output logger</Title>
 
-
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="15.8.0" />
-    <PackageReference Include="XunitContext" Version="3.3.1" />
   </ItemGroup>
   
-  <ItemGroup>
-    <Compile Include="..\Nullean.PrettyPrinter.Core\WordWrapper.cs" />
-    <Compile Include="..\Nullean.PrettyPrinter.Core\TestConsoleWriter.cs" />
-  </ItemGroup>
-
 </Project>
