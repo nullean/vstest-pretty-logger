@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/build/">
+    <File Path=".github/workflows/ci.yml" />
+    <File Path="build.bat" />
+    <File Path="build.sh" />
+    <File Path="Directory.Build.props" />
+    <File Path="global.json" />
+    <File Path="nuget-icon.png" />
+    <File Path="README.md" />
+    <Project Path="build/scripts/scripts.fsproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Nullean.VsTest.Pretty.TestLogger/Nullean.VsTest.Pretty.TestLogger.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Nullean.Partition.Tests/Nullean.Partition.Tests.csproj" />
+    <Project Path="tests/Nullean.PrettyLogger.Tests/Nullean.PrettyLogger.Tests.csproj" />
+    <Project Path="tests/Nullean.VsTest.Pretty.TestLogger.Tests/Nullean.VsTest.Pretty.TestLogger.Tests.csproj" />
+  </Folder>
+</Solution>
