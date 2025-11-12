@@ -2,12 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
@@ -48,6 +43,7 @@ namespace Nullean.VsTest.Pretty.TestLogger
 			events.TestRunMessage += (sender, args) =>
 			{
 				var parts = args.Message.Split(new[] { ']' }, 2, StringSplitOptions.RemoveEmptyEntries);
+				Console.WriteLine(args.Message);
 
 				switch (args.Level)
 				{
