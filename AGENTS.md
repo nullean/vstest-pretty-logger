@@ -10,12 +10,12 @@ pretty-prints stack traces and repeats every failure at the end of the run.
 |---|---|
 | `src/Nullean.VsTest.Pretty.TestLogger` | the logger (netstandard2.0); `PrettyLogger.cs` is the VSTest entry point, `TestConsoleWriter.cs` the output |
 | `tests/*` | example test projects (net10.0) wired to the logger through `.runsettings`; their tests fail, skip and run slow **on purpose** to show its output |
-| `build/scripts` | the F# build the `mise` tasks call |
+| `build/scripts` | the F# build ([Nullean.Make.Fs](https://www.nuget.org/packages/Nullean.Make.Fs), net11.0) the `mise` tasks call |
 | `build/keys` | the strong-name key the logger is signed with |
 
 ## Commands
 
-mise installs the SDK pinned in `global.json` (plus the net10.0 runtime the build and nupkg-validator run on). Run
+mise installs the SDK pinned in `global.json` (plus the net10.0 runtime nupkg-validator runs on). Run
 everything through it:
 
 ```bash
@@ -53,3 +53,5 @@ with the logger: the friendly name, the `.runsettings` wiring and `DisableFullSk
   `.runsettings` files name. Changing them is a breaking change.
 - The logger targets netstandard2.0 and references `Microsoft.TestPlatform.ObjectModel` 15.8.0, so it loads in old
   and new test hosts alike. Do not raise either without a reason.
+- Build targets are Make.Fs `target { }` blocks in `build/scripts/Program.fs` whose commands are Proc.Fs `sh $"…"`
+  lines; values come from `text` inside `shell { }` (`Versions.fs`). Do not call the C# `ProcNet` API from the build.
