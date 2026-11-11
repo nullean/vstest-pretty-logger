@@ -22,7 +22,8 @@ everything through it:
 mise run build    # build the solution
 mise run pack     # build, pack, validate the package, report public API changes
 mise run ci       # exactly what CI runs
-mise run check    # workflow security checks (zizmor)
+mise run format   # format the repository with curb
+mise run check    # formatting drift (curb) and workflow security checks (zizmor); CI runs the curb half
 mise run clean    # delete build output
 mise run release  # show the release draft; `mise run release publish` releases
 ```
