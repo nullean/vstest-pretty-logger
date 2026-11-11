@@ -24,6 +24,7 @@ mise run pack     # build, pack, validate the package, report public API changes
 mise run ci       # exactly what CI runs
 mise run check    # workflow security checks (zizmor)
 mise run clean    # delete build output
+mise run release  # show the release draft; `mise run release publish` releases
 ```
 
 `mise tasks ls` lists them all. The package and API reports go to `build/output`.
@@ -31,6 +32,20 @@ mise run clean    # delete build output
 There is no `test` task: the build's `test` target is deliberately a no-op, because the example tests are meant to
 fail. To see the logger at work, run one of them, for example
 `dotnet test tests/Nullean.PrettyLogger.Tests -c Release`, and expect a failing exit code.
+
+## Releasing
+
+release-drafter keeps a draft release up to date from the labels of merged pull requests. **Publishing the draft**
+releases: it creates the tag, and the `release` job in `ci.yml` packs at that version and pushes to nuget.org.
+`mise run release` shows the draft. The [releasing](.claude/skills/releasing/SKILL.md) and
+[breaking-changes](.claude/skills/breaking-changes/SKILL.md) skills have the details. Every pull request carries exactly
+one release label.
+
+## Packaging
+
+The package ships its README (`src/Nullean.VsTest.Pretty.TestLogger/README.md`) and an agent skill
+(`src/Nullean.VsTest.Pretty.TestLogger/skills/vstest-pretty-logger/SKILL.md`), packed at `skills/`. Keep both in step
+with the logger: the friendly name, the `.runsettings` wiring and `DisableFullSkipMessages`.
 
 ## Rules
 

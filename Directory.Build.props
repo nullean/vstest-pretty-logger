@@ -1,24 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
     <MinVerDefaultPreReleaseIdentifiers>canary.0</MinVerDefaultPreReleaseIdentifiers>
     <MinVerMinimumMajorMinor>0.1</MinVerMinimumMajorMinor>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="4.3.0" PrivateAssets="All"/>
+    <PackageReference Include="MinVer" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="../../nuget-icon.png" CopyToOutputDirectory="PreserveNewest">
-      <Link>nuget-icon.png</Link>
-      <Pack>True</Pack>
-      <PackagePath>nuget-icon.png</PackagePath>
-    </Content>
-    <None Include="../../license.txt" CopyToOutputDirectory="PreserveNewest">
-      <Pack>True</Pack>
-      <PackagePath>license.txt</PackagePath>
-    </None>
+
+  <!-- Package metadata, shared by every packable project -->
+  <PropertyGroup>
+    <Authors>Nullean and contributors</Authors>
+    <Copyright>Nullean</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>nuget-icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/nullean/vstest-pretty-logger</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/nullean/vstest-pretty-logger</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/nullean/vstest-pretty-logger/releases</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- the org icon, the license, each project's README.md, and its agent skill (skills/<name>/SKILL.md) go into the package -->
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+    <None Include="$(MSBuildThisFileDirectory)nuget-icon.png" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)license.txt" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="$(MSBuildProjectDirectory)/README.md" Pack="true" PackagePath="\"
+          Condition="Exists('$(MSBuildProjectDirectory)/README.md')" />
+    <None Include="$(MSBuildProjectDirectory)/skills/**/*" Pack="true" PackagePath="skills/" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
-  </ItemGroup> 
+  <PropertyGroup Condition="Exists('$(MSBuildProjectDirectory)/README.md')">
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
 </Project>
