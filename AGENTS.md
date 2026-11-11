@@ -1,0 +1,40 @@
+# vstest-pretty-logger
+
+`Nullean.VsTest.Pretty.TestLogger`: a VSTest logger (friendly name `pretty`) that replaces the default console
+logger for `dotnet test`. It prints each result with colours and markers, flags tests slower than two seconds,
+pretty-prints stack traces and repeats every failure at the end of the run.
+
+## Layout
+
+| Path | What |
+|---|---|
+| `src/Nullean.VsTest.Pretty.TestLogger` | the logger (netstandard2.0); `PrettyLogger.cs` is the VSTest entry point, `TestConsoleWriter.cs` the output |
+| `tests/*` | example test projects (net10.0) wired to the logger through `.runsettings`; their tests fail, skip and run slow **on purpose** to show its output |
+| `build/scripts` | the F# build the `mise` tasks call |
+| `build/keys` | the strong-name key the logger is signed with |
+
+## Commands
+
+mise installs the SDK pinned in `global.json` (plus the net10.0 runtime the build and nupkg-validator run on). Run
+everything through it:
+
+```bash
+mise run build    # build the solution
+mise run pack     # build, pack, validate the package, report public API changes
+mise run ci       # exactly what CI runs
+mise run check    # workflow security checks (zizmor)
+mise run clean    # delete build output
+```
+
+`mise tasks ls` lists them all. The package and API reports go to `build/output`.
+
+There is no `test` task: the build's `test` target is deliberately a no-op, because the example tests are meant to
+fail. To see the logger at work, run one of them, for example
+`dotnet test tests/Nullean.PrettyLogger.Tests -c Release`, and expect a failing exit code.
+
+## Rules
+
+- The friendly name `pretty`, the extension URI and the `DisableFullSkipMessages` run parameter are what users'
+  `.runsettings` files name. Changing them is a breaking change.
+- The logger targets netstandard2.0 and references `Microsoft.TestPlatform.ObjectModel` 15.8.0, so it loads in old
+  and new test hosts alike. Do not raise either without a reason.
