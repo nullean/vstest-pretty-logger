@@ -30,15 +30,9 @@ internal static class WordWrapper
 			write(line);
 	}
 
-	private static IEnumerable<string> ToWordWrappedLines(
-		this string paragraph,
-		int tabSize = 4,
-		int indent = 10,
-		int offset = 2)
+	private static IEnumerable<string> ToWordWrappedLines(this string paragraph, int tabSize = 4, int indent = 10, int offset = 2)
 	{
-		var lines = paragraph
-			.Replace("\t", new string(' ', tabSize))
-			.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+		var lines = paragraph.Replace("\t", new string(' ', tabSize)).Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
 		var offSetOnce = false;
 		foreach (var l in lines)
@@ -51,12 +45,14 @@ internal static class WordWrapper
 			while (line.Length > spacedWith)
 			{
 				var wrapAt = line.LastIndexOf(' ', Math.Min(spacedWith - 1, line.Length));
-				if (wrapAt <= 0) break;
+				if (wrapAt <= 0)
+					break;
 
 				wrapped.Add(indentation + line.Substring(0, wrapAt));
 				line = line.Remove(0, wrapAt + 1);
 
-				if (offSetOnce) continue;
+				if (offSetOnce)
+					continue;
 				indent = indent + offset;
 				indentation = new string(' ', indent);
 				spacedWith = Console.WindowWidth - indent;
@@ -68,7 +64,8 @@ internal static class WordWrapper
 
 			yield return indentation + line;
 
-			if (offSetOnce) continue;
+			if (offSetOnce)
+				continue;
 			indent = indent + offset;
 			indentation = new string(' ', indent);
 			spacedWith = Console.WindowWidth - indent;
@@ -86,6 +83,7 @@ internal static class WordWrapper
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine($": {tokens[1].Trim()}");
 		}
-		else Console.WriteLine(text);
+		else
+			Console.WriteLine(text);
 	}
 }

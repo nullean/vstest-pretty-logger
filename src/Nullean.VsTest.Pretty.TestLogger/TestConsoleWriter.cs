@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Reflection.Metadata;
 
@@ -6,8 +6,7 @@ namespace Nullean.PrettyPrinter.Core;
 
 internal class TestResultsStatistics
 {
-	public TestResultsStatistics(IDictionary<TestOutcomeWrapped, long> executed, string[] sources) =>
-		(Executed, Sources) = (executed, sources);
+	public TestResultsStatistics(IDictionary<TestOutcomeWrapped, long> executed, string[] sources) => (Executed, Sources) = (executed, sources);
 
 	public IDictionary<TestOutcomeWrapped, long> Executed { get; }
 	public double TotalTime { get; set; }
@@ -49,8 +48,10 @@ internal class TestConsoleWriter
 		PrintTestOutcomeHeader(result.Outcome, result.FullyQualifiedName, result.Duration, longForm);
 		switch (result.Outcome)
 		{
-			case TestOutcomeWrapped.NotFound: break;
-			case TestOutcomeWrapped.None: break;
+			case TestOutcomeWrapped.NotFound:
+				break;
+			case TestOutcomeWrapped.None:
+				break;
 			case TestOutcomeWrapped.Passed:
 				break;
 			case TestOutcomeWrapped.Skipped:
@@ -64,33 +65,30 @@ internal class TestConsoleWriter
 				if (longForm)
 					PrintLocation(result);
 				var indent = longForm ? 3 : 10;
-				result.ErrorMessage.WriteWordWrapped
-					(WordWrapper.WriteWithExceptionHighlighted, printAll: longForm, indent: indent);
+				result.ErrorMessage.WriteWordWrapped(WordWrapper.WriteWithExceptionHighlighted, printAll: longForm, indent: indent);
 				Console.ResetColor();
 				if (longForm)
 				{
 					PrintStackTrace(result.ErrorStackTrace);
 
 					var messages = result.Messages ?? Array.Empty<string>();
-					if (messages.Length == 0) break;
+					if (messages.Length == 0)
+						break;
 
 					Console.ForegroundColor = ConsoleColor.Yellow;
 					Console.WriteLine("   Messages:");
 					Console.ForegroundColor = ConsoleColor.White;
 					foreach (var message in messages)
-						message.WriteWordWrapped(indent:5, offset:0);
+						message.WriteWordWrapped(indent: 5, offset: 0);
 				}
 				break;
 		}
 	}
 
 	private static string SourceString(string[] sources) =>
-		sources.Length == 1
-			? Path.GetFileNameWithoutExtension(sources[0])
-			: $"{sources.Length:N0} TEST PROJECTS";
+		sources.Length == 1 ? Path.GetFileNameWithoutExtension(sources[0]) : $"{sources.Length:N0} TEST PROJECTS";
 
-	public void WriteStartTests(string[] sources) =>
-		Announce($"🧪 {SourceString(sources)}: ", "START", ConsoleColor.Green);
+	public void WriteStartTests(string[] sources) => Announce($"🧪 {SourceString(sources)}: ", "START", ConsoleColor.Green);
 
 	public void WriteTestStatistics(TestResultsStatistics stats, List<TestResultData> failedTests)
 	{
@@ -109,12 +107,11 @@ internal class TestConsoleWriter
 		if (f > 0)
 		{
 			Console.WriteLine();
-			Announce($"⚡️FAILURES: {sourceString} ", $"{f}", ConsoleColor.Red, addMargin:true);
+			Announce($"⚡️FAILURES: {sourceString} ", $"{f}", ConsoleColor.Red, addMargin: true);
 			Console.WriteLine();
-			foreach(var testResult in failedTests)
-				 WriteTestResult(testResult, true);
+			foreach (var testResult in failedTests)
+				WriteTestResult(testResult, true);
 		}
-
 
 		Announce($"🌈  SUMMARY: {sourceString} 🌈");
 
@@ -129,7 +126,8 @@ internal class TestConsoleWriter
 			Announce("✅  PASS:", Pad($"{passed:N0}"), ConsoleColor.DarkGreen);
 		if (stats.Executed.TryGetValue(TestOutcomeWrapped.Failed, out var failed) && failed > 0)
 			Announce("⚡️  FAIL:", Pad($"{failed:N0}"), ConsoleColor.DarkRed);
-		if (_slowTests > 0) Announce("🐢  SLOW:", Pad($"{_slowTests:N0}"));
+		if (_slowTests > 0)
+			Announce("🐢  SLOW:", Pad($"{_slowTests:N0}"));
 		if (stats.Executed.TryGetValue(TestOutcomeWrapped.Skipped, out var skipped) && skipped > 0)
 			Announce("⏩  SKIP:", Pad($"{skipped:N0}"), ConsoleColor.Yellow);
 		if (stats.Executed.TryGetValue(TestOutcomeWrapped.None, out var none) && none > 0)
@@ -143,10 +141,7 @@ internal class TestConsoleWriter
 		Console.WriteLine();
 	}
 
-	public static void Announce(
-		string text,
-		string? extraText = null,
-		ConsoleColor extraTextColor = ConsoleColor.Gray, bool? addMargin = null )
+	public static void Announce(string text, string? extraText = null, ConsoleColor extraTextColor = ConsoleColor.Gray, bool? addMargin = null)
 	{
 		var margin = addMargin ?? string.IsNullOrWhiteSpace(extraText);
 		if (string.IsNullOrWhiteSpace(extraText))
@@ -192,7 +187,8 @@ internal class TestConsoleWriter
 
 		void IndentBox()
 		{
-			if (string.IsNullOrWhiteSpace(extraText)) return;
+			if (string.IsNullOrWhiteSpace(extraText))
+				return;
 			Console.BackgroundColor = ConsoleColor.Gray;
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.Write("   ");
@@ -214,8 +210,7 @@ internal class TestConsoleWriter
 		Console.ResetColor();
 	}
 
-	private void PrintTestOutcomeHeader(TestOutcomeWrapped testOutcome, string? testName,
-		TimeSpan duration, bool longForm = false)
+	private void PrintTestOutcomeHeader(TestOutcomeWrapped testOutcome, string? testName, TimeSpan duration, bool longForm = false)
 	{
 		var takingTooLong = duration > TimeSpan.FromSeconds(2);
 		Console.ForegroundColor = ConsoleColor.Black;
@@ -232,8 +227,10 @@ internal class TestConsoleWriter
 			case TestOutcomeWrapped.Failed:
 				Console.BackgroundColor = ConsoleColor.Red;
 				Console.Write(" ⚡️");
-				if (longForm) Console.Write("[FAIL]");
-				else Console.Write(" FAIL ");
+				if (longForm)
+					Console.Write("[FAIL]");
+				else
+					Console.Write(" FAIL ");
 				break;
 			case TestOutcomeWrapped.None:
 				Console.BackgroundColor = ConsoleColor.Gray;
@@ -262,7 +259,8 @@ internal class TestConsoleWriter
 
 	private static void PrintLocation(TestResultData result)
 	{
-		if (result.LineNumber <= -1 || string.IsNullOrEmpty(result.CodeFilePath)) return;
+		if (result.LineNumber <= -1 || string.IsNullOrEmpty(result.CodeFilePath))
+			return;
 
 		var relativeFile = CreateRelativePath(result.CodeFilePath);
 		Console.ForegroundColor = ConsoleColor.Gray;
@@ -273,10 +271,10 @@ internal class TestConsoleWriter
 		Console.ResetColor();
 	}
 
-
 	private void PrintStackTrace(string? stackTrace)
 	{
-		if (string.IsNullOrWhiteSpace(stackTrace)) return;
+		if (string.IsNullOrWhiteSpace(stackTrace))
+			return;
 
 		//If a huge amount of test fail, dont bother doing all this work.
 		_prettiedTraces++;
@@ -326,7 +324,8 @@ internal class TestConsoleWriter
 
 	private static string CreateRelativePath(string? filePath)
 	{
-		if (string.IsNullOrWhiteSpace(filePath)) return string.Empty;
+		if (string.IsNullOrWhiteSpace(filePath))
+			return string.Empty;
 		var file = new Uri(filePath, UriKind.Absolute);
 
 		var relativeFile = Uri.UnescapeDataString(RootUri.MakeRelativeUri(file).ToString());
@@ -338,7 +337,8 @@ internal class TestConsoleWriter
 	private static string ToStringFromMilliseconds(double milliseconds, bool @fixed = false)
 	{
 		// less than one millisecond
-		if (milliseconds < 1D) return "<1 ms";
+		if (milliseconds < 1D)
+			return "<1 ms";
 
 		// milliseconds
 		if (milliseconds < 1_000D)
@@ -355,9 +355,7 @@ internal class TestConsoleWriter
 #pragma warning disable IDE0047 // Remove unnecessary parentheses
 			var seconds = ((milliseconds % 60_000D) / 1_000D).ToString("F0", Provider);
 #pragma warning restore IDE0047 // Remove unnecessary parentheses
-			return seconds == "0"
-				? $"{minutes} m"
-				: $"{minutes} m {seconds} s";
+			return seconds == "0" ? $"{minutes} m" : $"{minutes} m {seconds} s";
 		}
 
 		// minutes

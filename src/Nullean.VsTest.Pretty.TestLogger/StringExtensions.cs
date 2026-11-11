@@ -4,17 +4,15 @@
 
 using System;
 
-namespace Nullean.VsTest.Pretty.TestLogger
+namespace Nullean.VsTest.Pretty.TestLogger;
+
+internal static class StringExtensions
 {
-	internal static class StringExtensions
+	public static string CreateRelativePath(this string filePath)
 	{
-		public static string CreateRelativePath(this string filePath)
-		{
-			var file = new Uri(filePath, UriKind.Absolute);
+		var file = new Uri(filePath, UriKind.Absolute);
 
-			var relativeFile = Uri.UnescapeDataString(PrettyLogger.RootUri.MakeRelativeUri(file).ToString());
-			return relativeFile;
-		}
-
+		var relativeFile = Uri.UnescapeDataString(PrettyLogger.RootUri.MakeRelativeUri(file).ToString());
+		return relativeFile;
 	}
 }
