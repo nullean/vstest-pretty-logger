@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="MinVer" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- Package metadata, shared by every packable project -->

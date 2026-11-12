@@ -22,7 +22,7 @@ internal class TestResultData
 	public TimeSpan Duration { get; set; }
 	public string? ErrorMessage { get; set; }
 	public string? ErrorStackTrace { get; set; }
-	public string[]? Messages { get; set; }
+	public string?[]? Messages { get; set; }
 	public int LineNumber { get; set; }
 	public string? CodeFilePath { get; set; }
 }
@@ -56,7 +56,7 @@ internal class TestConsoleWriter
 				break;
 			case TestOutcomeWrapped.Skipped:
 				Console.ForegroundColor = ConsoleColor.Gray;
-				foreach (var message in result.Messages ?? Array.Empty<string>())
+				foreach (var message in result.Messages ?? Array.Empty<string?>())
 					message.WriteWordWrapped();
 				Console.ResetColor();
 				break;
@@ -71,7 +71,7 @@ internal class TestConsoleWriter
 				{
 					PrintStackTrace(result.ErrorStackTrace);
 
-					var messages = result.Messages ?? Array.Empty<string>();
+					var messages = result.Messages ?? Array.Empty<string?>();
 					if (messages.Length == 0)
 						break;
 

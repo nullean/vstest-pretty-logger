@@ -52,7 +52,7 @@ with the logger: the friendly name, the `.runsettings` wiring and `DisableFullSk
 
 - The friendly name `pretty`, the extension URI and the `DisableFullSkipMessages` run parameter are what users'
   `.runsettings` files name. Changing them is a breaking change.
-- The logger targets netstandard2.0 and references `Microsoft.TestPlatform.ObjectModel` 15.8.0, so it loads in old
-  and new test hosts alike. Do not raise either without a reason.
+- The logger targets netstandard2.0 and references the latest `Microsoft.TestPlatform.ObjectModel`, like every other
+  dependency. Its floor is the oldest VSTest that can load the logger, so a major bump of it is a breaking change.
 - Build targets are Make.Fs `target { }` blocks in `build/scripts/Program.fs` whose commands are Proc.Fs `sh $"…"`
   lines; values come from `text` inside `shell { }` (`Versions.fs`). Do not call the C# `ProcNet` API from the build.

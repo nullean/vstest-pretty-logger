@@ -5,22 +5,20 @@
 
   <!-- every project (Directory.Build.props) -->
   <ItemGroup>
-    <PackageVersion Include="MinVer" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+    <PackageVersion Include="MinVer" Version="8.0.0" />
   </ItemGroup>
 
   <!-- the logger -->
   <ItemGroup>
-    <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="15.8.0" />
+    <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="18.12.0" />
   </ItemGroup>
 
   <!-- the example tests -->
   <ItemGroup>
-    <PackageVersion Include="coverlet.collector" Version="3.2.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageVersion Include="Nullean.Xunit.Partitions" Version="0.5.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageVersion Include="Nullean.Xunit.Partitions" Version="0.14.1" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
   </ItemGroup>
 
   <!-- build/scripts -->
@@ -28,6 +26,6 @@
     <!-- under CPM the F# SDK adds no implicit FSharp.Core; Nullean.Make.Fs needs 11.0.100 or later -->
     <PackageVersion Include="FSharp.Core" Version="11.0.101" />
     <!-- brings Proc and Proc.Fs -->
-    <PackageVersion Include="Nullean.Make.Fs" Version="0.25.0" />
+    <PackageVersion Include="Nullean.Make.Fs" Version="0.27.2" />
   </ItemGroup>
 </Project>

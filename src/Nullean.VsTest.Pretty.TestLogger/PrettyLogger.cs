@@ -144,12 +144,14 @@ public class PrettyLogger : ITestLogger
 
 	private void TestRunCompleteHandler(object sender, TestRunCompleteEventArgs e)
 	{
-		var overallStats = e.TestRunStatistics.Stats.ToDictionary(kv => ParseOutcome(kv.Key), v => v.Value);
+		// null when the run aborted before the host reported any statistics
+		var runStatistics = e.TestRunStatistics;
+		var overallStats = runStatistics?.Stats.ToDictionary(kv => ParseOutcome(kv.Key), v => v.Value) ?? new Dictionary<TestOutcomeWrapped, long>();
 		var stats = new TestResultsStatistics(overallStats, _discoveredSources)
 		{
 			TestFilter = _testFilter,
 			TotalTime = e.ElapsedTimeInRunningTests.TotalMilliseconds,
-			TotalExecuted = e.TestRunStatistics.ExecutedTests,
+			TotalExecuted = runStatistics?.ExecutedTests ?? 0,
 		};
 
 		var failures = new List<TestResultData>();
