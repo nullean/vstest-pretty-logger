@@ -64,9 +64,9 @@ let main argv =
               for package in packages () do
                   let package = Paths.RootRelative package.FullName
                   if jenkinsOnWindows then
-                      sh $"dotnet nupkg-validator {package} -v {version} -k {Paths.SignKey} -t {output} -r true"
+                      sh $"dotnet nupkg-validator validate {package} -v {version} -k {Paths.SignKey} -t {output} -r"
                   else
-                      sh $"dotnet nupkg-validator {package} -v {version} -k {Paths.SignKey} -t {output}" }
+                      sh $"dotnet nupkg-validator validate {package} -v {version} -k {Paths.SignKey} -t {output}" }
         | Generateapichanges -> target [] {
               let version = Versions.current.Value
               let tfm = Paths.MainTFM
