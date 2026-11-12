@@ -2,6 +2,13 @@
   "version": 1,
   "isRoot": true,
   "tools": {
+    "assembly-differ": {
+      "version": "0.17.0",
+      "commands": [
+        "assembly-differ"
+      ],
+      "rollForward": false
+    },
     "minver-cli": {
       "version": "8.0.0",
       "commands": [
@@ -13,13 +20,6 @@
       "version": "0.11.5",
       "commands": [
         "nupkg-validator"
-      ],
-      "rollForward": false
-    },
-    "assembly-differ": {
-      "version": "0.17.0",
-      "commands": [
-        "assembly-differ"
       ],
       "rollForward": false
     },
