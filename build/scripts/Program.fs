@@ -50,8 +50,8 @@ let main argv =
               for project in projectsToClean () do
                   sh $"dotnet clean {project} -c Release -v q" }
         | Build -> command {
-              composes [Clean]
-              executes (shell { sh $"dotnet build -c Release" }) }
+              composes [Clean] }
+                   |> executes { sh $"dotnet build -c Release" }
         // the example tests fail, skip and run slow on purpose, to show the logger's output: nothing to run here
         | Test -> target [Build] { () }
         | Pack -> command { requires [Build]; composes [Generatepackages; Validatepackages; Generateapichanges] }

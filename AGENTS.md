@@ -9,14 +9,13 @@ pretty-prints stack traces and repeats every failure at the end of the run.
 | Path | What |
 |---|---|
 | `src/Nullean.VsTest.Pretty.TestLogger` | the logger (netstandard2.0); `PrettyLogger.cs` is the VSTest entry point, `TestConsoleWriter.cs` the output |
-| `tests/*` | example test projects (net10.0) wired to the logger through `.runsettings`; their tests fail, skip and run slow **on purpose** to show its output |
+| `tests/*` | example test projects (net11.0) wired to the logger through `.runsettings`; their tests fail, skip and run slow **on purpose** to show its output |
 | `build/scripts` | the F# build ([Nullean.Make.Fs](https://www.nuget.org/packages/Nullean.Make.Fs), net11.0) the `mise` tasks call |
 | `build/keys` | the strong-name key the logger is signed with |
 
 ## Commands
 
-mise installs the SDK pinned in `global.json` (plus the net10.0 runtime nupkg-validator runs on). Run
-everything through it:
+mise installs the SDK pinned in `global.json`. Run everything through it:
 
 ```bash
 mise run build    # build the solution
