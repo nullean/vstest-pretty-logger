@@ -2,10 +2,10 @@ module Program
 
 open System
 open System.IO
-open Nullean.Make.Fs
+open Nullean.Runna.Fs
 open Proc.Fs
 
-/// The build's targets; `dotnet run --project build/scripts -- --help` lists them with these descriptions. Make.Fs
+/// The build's targets; `dotnet run --project build/scripts -- --help` lists them with these descriptions. Runna.Fs
 /// turns a case name into kebab-case, so the multi-word ones are spelled as one word to keep their old names
 /// (`generatepackages`, ...)
 type Target =
@@ -41,7 +41,7 @@ let private projectsToClean () =
 
 [<EntryPoint>]
 let main argv =
-    let app = MakeApp<Target>("dotnet run --project build/scripts --", None)
+    let app = RunnaApp<Target>("dotnet run --project build/scripts --", None)
 
     // `-s` skips what a target `requires`, never what it `composes`: build always cleans first
     app.Bind <| function
