@@ -10,7 +10,7 @@ pretty-prints stack traces and repeats every failure at the end of the run.
 |---|---|
 | `src/Nullean.VsTest.Pretty.TestLogger` | the logger (netstandard2.0); `PrettyLogger.cs` is the VSTest entry point, `TestConsoleWriter.cs` the output |
 | `tests/*` | example test projects (net11.0) wired to the logger through `.runsettings`; their tests fail, skip and run slow **on purpose** to show its output |
-| `build/scripts` | the F# build ([Nullean.Make.Fs](https://www.nuget.org/packages/Nullean.Make.Fs), net11.0) the `mise` tasks call |
+| `build/scripts` | the F# build ([Runna.Fs](https://www.nuget.org/packages/Runna.Fs), net11.0) the `mise` tasks call |
 | `build/keys` | the strong-name key the logger is signed with |
 
 ## Commands
@@ -53,5 +53,5 @@ with the logger: the friendly name, the `.runsettings` wiring and `DisableFullSk
   `.runsettings` files name. Changing them is a breaking change.
 - The logger targets netstandard2.0 and references the latest `Microsoft.TestPlatform.ObjectModel`, like every other
   dependency. Its floor is the oldest VSTest that can load the logger, so a major bump of it is a breaking change.
-- Build targets are Make.Fs `target { }` blocks in `build/scripts/Program.fs` whose commands are Proc.Fs `sh $"…"`
+- Build targets are Runna.Fs `target { }` blocks in `build/scripts/Program.fs` whose commands are Proc.Fs `sh $"…"`
   lines; values come from `text` inside `shell { }` (`Versions.fs`). Do not call the C# `ProcNet` API from the build.
